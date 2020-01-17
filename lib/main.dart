@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 import 'transaction.dart';
 
 void main() => runApp(MyApp());
@@ -27,7 +29,7 @@ class MyHomePage extends StatelessWidget {
         title: Text('Home Page'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
@@ -51,7 +53,7 @@ class MyHomePage extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        '${transaction.amount.toString()} €',
+                        '${transaction.amount} €',
                         style: TextStyle(
                           color: Colors.lightBlue,
                           fontSize: 20,
@@ -68,7 +70,9 @@ class MyHomePage extends StatelessWidget {
                               fontSize: 16,
                               color: Colors.black45),
                         ),
-                        Text(transaction.date.toString()),
+                        Text(
+                          DateFormat.yMMMd().format(transaction.date),
+                        ),
                       ],
                     )
                   ],
@@ -76,6 +80,27 @@ class MyHomePage extends StatelessWidget {
               );
             }).toList(),
           ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Container(
+                child: TextField(
+                  decoration: InputDecoration(labelText: 'Title'),
+                ),
+                padding: EdgeInsets.all(10),
+              ),
+              Container(
+                child: TextField(
+                  decoration: InputDecoration(labelText: 'Amount'),
+                ),
+                padding: EdgeInsets.all(10),
+              ),
+              FlatButton(
+                child: Text('Add'),
+                onPressed: null,
+              ),
+            ],
+          )
         ],
       ),
     );
